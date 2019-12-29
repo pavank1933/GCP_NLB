@@ -1,0 +1,52 @@
+imports:
+- path: config.yaml
+  name: "create-vpc-subnets-vms" 
+
+resources:
+- name: gcp-hc-one
+  type: compute.v1.httpHealthCheck
+  properties:
+    port: 80
+    requestPath: "/"
+    checkIntervalSec: 60
+
+- name: gcp-tp-one
+  type: compute.v1.targetPool
+  properties:
+    region: us-east1
+    instances:
+      - https://www.googleapis.com/compute/v1/projects/sam-nlb/zones/us-east1-a/instances/network1-us-vm11
+      - https://www.googleapis.com/compute/v1/projects/sam-nlb/zones/us-east1-a/instances/network1-us-vm12
+      - https://www.googleapis.com/compute/v1/projects/sam-nlb/zones/us-east1-b/instances/network1-us-vm13
+    healthChecks: [$(ref.gcp-hc-one.selfLink)]
+
+- name: gcp-fr-one
+  type: compute.v1.forwardingRule
+  properties:
+    region: us-east1
+    portRange: 80
+    target: $(ref.gcp-tp-one.selfLink)
+
+- name: gcp-hc-two
+  type: compute.v1.httpHealthCheck
+  properties:
+    port: 2100
+    requestPath: "/"
+    checkIntervalSec: 60
+
+- name: gcp-tp-two
+  type: compute.v1.targetPool
+  properties:
+    region: us-east1
+    instances:
+      - https://www.googleapis.com/compute/v1/projects/sam-nlb/zones/us-east1-a/instances/network1-us-vm21
+      - https://www.googleapis.com/compute/v1/projects/sam-nlb/zones/us-east1-a/instances/network1-us-vm22
+      - https://www.googleapis.com/compute/v1/projects/sam-nlb/zones/us-east1-b/instances/network1-us-vm23
+    healthChecks: [$(ref.gcp-hc-two.selfLink)]
+
+- name: gcp-fr-two
+  type: compute.v1.forwardingRule
+  properties:
+    region: us-east1
+    portRange: 2100
+    target: $(ref.gcp-tp-two.selfLink)
