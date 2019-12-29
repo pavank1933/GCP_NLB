@@ -19,4 +19,4 @@ gcloud config set compute/zone zone_name
 
 #### (c)
 **Deploy the resources**<br/>
-gcloud deployment-manager deployments create quickstart-deployment --config vm.yaml
+gcloud deployment-manager deployments create quickstart-deployment --config config.yaml
