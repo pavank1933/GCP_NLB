@@ -1,0 +1,87 @@
+imports:
+- path: autonetwork-template.jinja
+- path: customnetwork-template.jinja
+- path: subnetwork-template.jinja
+- path: firewall-template.jinja
+- path: instance-template.jinja
+
+resources:
+- name: network1
+  type: autonetwork-template.jinja
+
+- name: network1-subnet1-useast1a
+  type: subnetwork-template.jinja
+  properties:
+    ipCidrRange: 10.10.1.0/24
+    network: $(ref.network1.selfLink)
+    region: us-east1
+
+- name: network1-subnet2-useast1a
+  type: subnetwork-template.jinja
+  properties:
+    ipCidrRange: 10.10.2.0/24
+    network: $(ref.network1.selfLink)
+    region: us-east1
+
+- name: network1-subnet3-useast1b
+  type: subnetwork-template.jinja
+  properties:
+    ipCidrRange: 10.10.3.0/24
+    network: $(ref.network1.selfLink)
+    region: us-east1
+
+- name: network1-allow-tcp
+  type: firewall-template.jinja
+  properties:
+    network: $(ref.network1.selfLink)
+    IPProtocol: TCP
+    Port: [80, 2100]
+
+- name: network1-us-vm11
+  type: instance-template.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    network: $(ref.network1.selfLink)
+    subnetwork: $(ref.network1-subnet1-useast1a.selfLink)
+
+- name: network1-us-vm21
+  type: instance-template.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    network: $(ref.network1.selfLink)
+    subnetwork: $(ref.network1-subnet1-useast1a.selfLink)
+
+- name: network1-us-vm12
+  type: instance-template.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    network: $(ref.network1.selfLink)
+    subnetwork: $(ref.network1-subnet2-useast1a.selfLink)
+
+- name: network1-us-vm22
+  type: instance-template.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    network: $(ref.network1.selfLink)
+    subnetwork: $(ref.network1-subnet2-useast1a.selfLink)
+
+- name: network1-us-vm13
+  type: instance-template.jinja
+  properties:
+    zone: us-east1-b
+    machineType: n1-standard-1
+    network: $(ref.network1.selfLink)
+    subnetwork: $(ref.network1-subnet3-useast1b.selfLink)
+
+- name: network1-us-vm23
+  type: instance-template.jinja
+  properties:
+    zone: us-east1-b
+    machineType: n1-standard-1
+    network: $(ref.network1.selfLink)
+    subnetwork: $(ref.network1-subnet3-useast1b.selfLink)
+
