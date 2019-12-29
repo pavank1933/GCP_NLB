@@ -1,6 +1,6 @@
 # GCP_NLB
 Create nlb setup in GCP<br/>
-**AIM-** <br/>
+**STEPS:** <br/>
 **config.yaml-** Create VPC, Subnets, instances in the respective subnets in GCP using deployment manager scripts. <br/>
 **main.yaml-** Create NLB in GCP <br/>
 
@@ -19,6 +19,6 @@ gcloud config set project myproject
 gcloud config set compute/region region_name
 gcloud config set compute/zone zone_name
 
-#### (c) #### Final step
+#### (c) **Final step**
 **Deploy the resources**<br/>
 gcloud deployment-manager deployments create quickstart-deployment --config main.yaml
