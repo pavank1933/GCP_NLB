@@ -1,13 +1,13 @@
 # GCP_NLB
 Create nlb setup in GCP<br/>
-**1.** Create VPC, Subnets, instances in the respective subnets in GCP using deployment manager scripts
+**AIM-** Create VPC, Subnets, instances in the respective subnets in GCP using deployment manager scripts
 
 ## Pre-requisites
-#### a.
+#### (a)
 **Gcloud deployment manager enable API setup**<br/>
 https://cloud.google.com/deployment-manager/docs/step-by-step-guide/installation-and-setup
 
-#### b.
+#### (b)
 **Install Cloud SDK**<br/>
 Download and authenticate gcloud
 Alternatively, use Cloud Shell, which comes with gcloud already installed.
@@ -17,6 +17,6 @@ gcloud config set project myproject
 gcloud config set compute/region region_name
 gcloud config set compute/zone zone_name
 
-#### c.
+#### (c)
 **Deploy the resources**<br/>
 gcloud deployment-manager deployments create quickstart-deployment --config vm.yaml
