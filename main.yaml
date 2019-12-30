@@ -3,6 +3,9 @@ imports:
   name: "create-vpc-subnets-vms" 
 
 resources:
+- name: compute-engine-setup
+  type: config.yaml
+  
 - name: gcp-hc-one
   type: compute.v1.httpHealthCheck
   properties:
