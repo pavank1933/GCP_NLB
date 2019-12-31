@@ -1,6 +1,7 @@
 resources:
 - type: compute.v1.instance
-  name: {{ env["deployment"] }}-instance
+  name: {{ properties["item_name"] }}-instance
+  #name: {{ env["deployment"] }}-instance
   properties:
      machineType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ properties["zone"] }}/machineTypes/{{ properties["machineType"] }}
      zone: {{ properties["zone"] }}
@@ -9,13 +10,13 @@ resources:
          subnetwork: $(ref.{{ properties["subnetwork"] }}.selfLink)
          accessConfigs: []
      disks:
-      - deviceName: boot
+      - deviceName: {{ properties["device_name"] }}-boot
         type: PERSISTENT
         boot: true
         autoDelete: true
         initializeParams:
-          diskName: boot
-          sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301
+          diskName: {{ properties["device_name"] }}-boot
+          sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160418
      tags:
        items:
          - {{ properties["item_name"] }}

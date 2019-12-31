@@ -2,7 +2,7 @@ resources:
 - type: compute.v1.network
   name: {{ env["deployment"] }}-network
   properties:
-     IPv4Range: {{ properties["ipv4Range"] }}
+     #IPv4Range: {{ properties["ipv4Range"] }}
      autoCreateSubnetworks: false
 # Create subnetworks
 {% for subnet in properties["subnets"] %}
