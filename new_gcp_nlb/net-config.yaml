@@ -1,0 +1,58 @@
+imports:
+  - path: network.jinja
+  - path: instance.jinja
+resources:
+- name: network
+  type: network.jinja
+  properties:
+    ipv4Range: 10.10.0.0/16
+    region: us-east1
+    subnets:
+      - range: 10.10.1.0/24
+        name: network-subnet1-useast1a
+      - range: 10.10.2.0/24
+        name: network-subnet2-useast1a
+      - range: 10.10.3.0/24
+        name: network-subnet3-useast1b
+- name: network-us-vm11
+  type: instance.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    item_name: network-us-vm11
+    subnetwork: network-subnet1-useast1a
+- name: network-us-vm21
+  type: instance.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    item_name: network-us-vm21
+    subnetwork: network-subnet1-useast1a
+- name: network-us-vm12
+  type: instance.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    item_name: network-us-vm12
+    subnetwork: network-subnet2-useast1a
+- name: network-us-vm22
+  type: instance.jinja
+  properties:
+    zone: us-east1-a
+    machineType: n1-standard-1
+    item_name: network-us-vm22
+    subnetwork: network-subnet2-useast1a
+- name: network-us-vm13
+  type: instance.jinja
+  properties:
+    zone: us-east1-b
+    machineType: n1-standard-1
+    item_name: network-us-vm13
+    subnetwork: network-subnet3-useast1b
+- name: network-us-vm23
+  type: instance.jinja
+  properties:
+    zone: us-east1-b
+    machineType: n1-standard-1
+    item_name: network-us-vm23
+    subnetwork: network-subnet3-useast1b
