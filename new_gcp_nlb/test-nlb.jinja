@@ -1,0 +1,21 @@
+resources:
+- type: compute.v1.httpHealthCheck
+  name: gcp-hc-one
+  properties:
+     port: {{ properties["port"] }}
+     requestPath: /
+     checkIntervalSec: 60
+- type: compute.v1.targetPool
+  name: gcp-tp-one
+  properties:
+    region: us-east1
+    #instances: []
+    instances: [ "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm11-instance","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm11-instance","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm12-instance" ]
+    healthChecks: [$(ref.gcp-hc-one.selfLink)]
+#Forwarding Rule
+- type: compute.v1.forwardingRule
+  name: gcp-fr-one
+  properties:
+    region: us-east1
+    portRange: {{ properties["port"] }}
+    target: $(ref.gcp-tp-one.selfLink) 

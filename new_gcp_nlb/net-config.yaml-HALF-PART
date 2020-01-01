@@ -1,0 +1,8 @@
+imports:
+  - path: test-nlb.jinja
+resources:
+
+- name: nlb1
+  type: test-nlb.jinja
+  properties:
+    port: 80
