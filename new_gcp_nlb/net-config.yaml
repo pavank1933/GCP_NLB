@@ -1,6 +1,7 @@
 imports:
   - path: network.jinja
   - path: instance.jinja
+  - path: nlb.jinja
 resources:
 - name: network
   type: network.jinja
@@ -62,3 +63,43 @@ resources:
     machineType: n1-standard-1
     item_name: network-us-vm23
     subnetwork: network-subnet3-useast1c
+
+
+- type: compute.v1.httpHealthCheck
+  name: gcp-hc-one
+  properties:
+     port: 80
+     requestPath: "/"
+     checkIntervalSec: 60
+- type: compute.v1.targetPool
+  name: gcp-tp-one
+  properties:
+    region: us-east1
+    instances: [ "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm11","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm12","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/instances/network-us-vm13" ]
+    healthChecks: [$(ref.gcp-hc-one.selfLink)]
+- type: compute.v1.forwardingRule
+  name: gcp-fr-one
+  properties:
+    region: us-east1
+    portRange: 80
+    target: $(ref.gcp-tp-one.selfLink) 
+
+
+- type: compute.v1.httpHealthCheck
+  name: gcp-hc-two
+  properties:
+     port: 2100
+     requestPath: "/"
+     checkIntervalSec: 60
+- type: compute.v1.targetPool
+  name: gcp-tp-two
+  properties:
+    region: us-east1
+    instances: [ "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm21","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm22","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/instances/network-us-vm23" ]
+    healthChecks: [$(ref.gcp-hc-two.selfLink)]
+- type: compute.v1.forwardingRule
+  name: gcp-fr-two
+  properties:
+    region: us-east1
+    portRange: 2100
+    target: $(ref.gcp-tp-two.selfLink) 

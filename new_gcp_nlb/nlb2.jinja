@@ -1,0 +1,31 @@
+resources:
+#Health Check
+- type: compute.v1.httpHealthCheck
+  name: gcp-hc-{{ properties["hc_name"] }}
+  properties:
+     port: {{ properties["port"] }}
+     requestPath: "/"
+     checkIntervalSec: 60
+
+#Target Pool
+- type: compute.v1.targetPool
+  name: gcp-tp-{{ properties["tp_name"] }}
+  properties:
+    region: us-east1
+    instances: [ {{ properties["vm1"] }},{{ properties["vm2"] }},{{ properties["vm3"] }} ]
+    healthChecks: [$(ref.gcp-hc-{{ properties["hc_name"] }}.selfLink)]
+    #instances:
+    #  - {{ properties["vm1"] }}
+    #  - {{ properties["vm2"] }}
+    #  - {{ properties["vm3"] }}
+    #instances: [ {{ properties["instances"] }} ]
+    #instances: [ 'https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/{{ properties["zone1"] }}/instaces/{{ properties["vm_name1"] }}','https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/{{ properties["zone2"] }}/instances/{{ properties["vm_name2"] }}','https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/{{ properties["zone3"] }}/instances/{{ properties["vm_name3"] }}' ]
+    #instances: [ "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/{{ properties["zone1"] }}/instaces/{{ properties["vm_name1"] }}","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/{{ properties["zone2"] }}/instances/{{ properties["vm_name2"] }}","https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/{{ properties["zone3"] }}/instances/{{ properties["vm_name3"] }}" ]
+
+#Forwarding Rule
+- type: compute.v1.forwardingRule
+  name: gcp-fr-{{ properties["fr_name"] }}
+  properties:
+    region: us-east1
+    portRange: {{ properties["port"] }}
+    target: $(ref.gcp-tp-{{ properties["tp_name"] }}.selfLink) 

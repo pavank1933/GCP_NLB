@@ -1,0 +1,108 @@
+imports:
+  - path: network.jinja
+  - path: instance.jinja
+  - path: nlb.jinja
+resources:
+- name: network
+  type: network.jinja
+  properties:
+    ipv4Range: 10.10.0.0/16
+    region: us-east1
+    subnets:
+      - range: 10.10.1.0/24
+        name: network-subnet1-useast1b
+      - range: 10.10.2.0/24
+        name: network-subnet2-useast1b
+      - range: 10.10.3.0/24
+        name: network-subnet3-useast1c
+- name: network-us-vm11
+  type: instance.jinja
+  properties:
+    zone: us-east1-b
+    device_name: vm11
+    machineType: n1-standard-1
+    item_name: network-us-vm11
+    subnetwork: network-subnet1-useast1b
+- name: network-us-vm21
+  type: instance.jinja
+  properties:
+    zone: us-east1-b
+    device_name: vm21
+    machineType: n1-standard-1
+    item_name: network-us-vm21
+    subnetwork: network-subnet1-useast1b
+- name: network-us-vm12
+  type: instance.jinja
+  properties:
+    zone: us-east1-b
+    device_name: vm12
+    machineType: n1-standard-1
+    item_name: network-us-vm12
+    subnetwork: network-subnet2-useast1b
+- name: network-us-vm22
+  type: instance.jinja
+  properties:
+    zone: us-east1-b
+    device_name: vm22
+    machineType: n1-standard-1
+    item_name: network-us-vm22
+    subnetwork: network-subnet2-useast1b
+- name: network-us-vm13
+  type: instance.jinja
+  properties:
+    zone: us-east1-c
+    device_name: vm13
+    machineType: n1-standard-1
+    item_name: network-us-vm13
+    subnetwork: network-subnet3-useast1c
+- name: network-us-vm23
+  type: instance.jinja
+  properties:
+    zone: us-east1-c
+    device_name: vm23
+    machineType: n1-standard-1
+    item_name: network-us-vm23
+    subnetwork: network-subnet3-useast1c
+
+- name: nlb1
+  type: nlb.jinja
+  properties:
+    port: 80
+    hc_name: one
+    tp_name: one
+    fr_name: one
+    region: us-east1
+    vm1: "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm11"
+    vm2: "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm12"
+    vm3: "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/instances/network-us-vm13"
+    #instances: [ 'https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instaces/network-us-vm11','https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm12','https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/instances/network-us-vm13' ]
+    #zone1: us-east1-b
+    #vm_name1: network-us-vm11
+    #zone2: us-east1-b
+    #vm_name2: network-us-vm12
+    #zone3: us-east1-c
+    #vm_name3: network-us-vm13
+
+- name: nlb2
+  type: nlb.jinja
+  properties:
+    port: 2100
+    hc_name: two
+    tp_name: two
+    fr_name: two
+    region: us-east1
+    vm1: "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm21"
+    vm2: "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm22"
+    vm3: "https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/instances/network-us-vm23"
+#    instances: [ 'https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instaces/network-us-vm21','https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm22','https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/instances/network-us-vm23' ] 
+#    metadata:
+#      dependsOn:
+#      - network-us-vm21
+#      - network-us-vm22
+#      - network-us-vm23
+    #zone1: us-east1-b
+    #vm_name1: network-us-vm21
+    #zone2: us-east1-b
+    #vm_name2: network-us-vm22
+    #zone3: us-east1-c
+    #vm_name3: network-us-vm23
