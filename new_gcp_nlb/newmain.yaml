@@ -1,0 +1,10 @@
+imports:
+- path: newfire.jinja
+- path: newinst-test.jinja
+
+resources:
+- name: compute-firewall
+  type: newfire.jinja
+- name: compute-vms
+  type: newinst-test.jinja
+
