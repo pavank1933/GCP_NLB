@@ -1,0 +1,23 @@
+resources:
+- name: http-port
+  type: compute.v1.firewall
+  properties:
+    #network: default
+    #network: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/global/networks/sam-nlb-test-network
+    network: projects/lithe-bazaar-250717/global/networks/default
+    targetTags: ["http"]
+    sourceRanges: ["0.0.0.0/0"]
+    allowed:
+    - IPProtocol: TCP
+      ports: ["80"]
+- name: custom-firewall
+  type: compute.v1.firewall
+  properties:
+    #network: default
+    #network: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/global/networks/sam-nlb-test-network
+    network: projects/lithe-bazaar-250717/global/networks/default
+    targetTags: ["custom-firewall"]
+    sourceRanges: ["0.0.0.0/0"]
+    allowed:
+    - IPProtocol: TCP
+      ports: ["2100"]

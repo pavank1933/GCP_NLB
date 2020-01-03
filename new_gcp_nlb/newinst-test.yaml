@@ -1,0 +1,138 @@
+resources:
+- type: compute.v1.instance
+  name: network-us-vm11
+  properties:
+     #machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     machineType: projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     zone: us-east1-b
+     networkInterfaces:
+       - network: projects/lithe-bazaar-250717/global/networks/default
+         #subnetwork: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/regions/us-east1/subnetworks/network-subnet1-useast1b
+         subnetwork: projects/lithe-bazaar-250717/regions/us-east1/subnetworks/default
+         accessConfigs: []
+     disks:
+      - deviceName: rootnew-boot1
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          diskName: rootnew-boot1
+          sourceImage: projects/debian-cloud/global/images/debian-8-jessie-v20160418
+          #sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160418
+     tags:
+        items: ["http"]
+
+- type: compute.v1.instance
+  name: network-us-vm21
+  properties:
+     #machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     machineType: projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     zone: us-east1-b
+     networkInterfaces:
+       - network: projects/lithe-bazaar-250717/global/networks/default
+         #subnetwork: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/regions/us-east1/subnetworks/network-subnet1-useast1b
+         subnetwork: projects/lithe-bazaar-250717/regions/us-east1/subnetworks/default
+         accessConfigs: []
+     disks:
+      - deviceName: rootnew-boot2
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          diskName: rootnew-boot2
+          sourceImage: projects/debian-cloud/global/images/debian-8-jessie-v20160418
+          #sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160418
+     tags:
+        items: ["custom-firewall"]
+
+- type: compute.v1.instance
+  name: network-us-vm12
+  properties:
+     #machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     machineType: projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     zone: us-east1-b
+     networkInterfaces:
+       - network: projects/lithe-bazaar-250717/global/networks/default
+         #subnetwork: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/regions/us-east1/subnetworks/network-subnet1-useast1b
+         subnetwork: projects/lithe-bazaar-250717/regions/us-east1/subnetworks/default
+         accessConfigs: []
+     disks:
+      - deviceName: rootnew-boot3
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          diskName: rootnew-boot3
+          sourceImage: projects/debian-cloud/global/images/debian-8-jessie-v20160418
+          #sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160418
+     tags:
+        items: ["http"]
+
+- type: compute.v1.instance
+  name: network-us-vm22
+  properties:
+     #machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     machineType: projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     zone: us-east1-b
+     networkInterfaces:
+       - network: projects/lithe-bazaar-250717/global/networks/default
+         #subnetwork: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/regions/us-east1/subnetworks/network-subnet1-useast1b
+         subnetwork: projects/lithe-bazaar-250717/regions/us-east1/subnetworks/default
+         accessConfigs: []
+     disks:
+      - deviceName: rootnew-boot4
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          diskName: rootnew-boot4
+          sourceImage: projects/debian-cloud/global/images/debian-8-jessie-v20160418
+          #sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160418
+     tags:
+        items: ["custom-firewall"]
+
+- type: compute.v1.instance
+  name: network-us-vm13
+  properties:
+     #machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     machineType: projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     zone: us-east1-b
+     networkInterfaces:
+       - network: projects/lithe-bazaar-250717/global/networks/default
+         subnetwork: projects/lithe-bazaar-250717/regions/us-east1/subnetworks/default
+         #subnetwork: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/regions/us-east1/subnetworks/network-subnet1-useast1b
+         accessConfigs: []
+     disks:
+      - deviceName: rootnew-boot5
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          diskName: rootnew-boot5
+          sourceImage: projects/debian-cloud/global/images/debian-8-jessie-v20160418
+          #sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160418
+     tags:
+        items: ["http"]
+
+- type: compute.v1.instance
+  name: network-us-vm23
+  properties:
+     #machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     machineType: projects/lithe-bazaar-250717/zones/us-east1-b/machineTypes/n1-standard-1
+     zone: us-east1-b
+     networkInterfaces:
+       - network: projects/lithe-bazaar-250717/global/networks/default
+         subnetwork: projects/lithe-bazaar-250717/regions/us-east1/subnetworks/default
+         #subnetwork: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/regions/us-east1/subnetworks/network-subnet1-useast1b
+         accessConfigs: []
+     disks:
+      - deviceName: rootnew-boot6
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          diskName: rootnew-boot6
+          sourceImage: projects/debian-cloud/global/images/debian-8-jessie-v20160418
+          #sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160418
+     tags:
+        items: ["custom-firewall"]
