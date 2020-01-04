@@ -1,0 +1,6 @@
+gcloud config set project lithe-bazaar-250717
+cd /home/pavandevops33/samtest/NEW_GCP_NLB
+gcloud deployment-manager deployments create fire-test --config=newfire.yaml
+gcloud deployment-manager deployments create inst-test --config=newinst-test.yaml
+gcloud deployment-manager deployments create route-test --config=route.yaml
+gcloud deployment-manager deployments create nlb-test --config=nlb.yaml
