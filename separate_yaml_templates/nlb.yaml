@@ -1,0 +1,19 @@
+resources:
+- type: compute.v1.httpHealthCheck
+  name: gcp-hc-one
+  properties:
+     port: 80
+     requestPath: "/"
+     checkIntervalSec: 60
+- type: compute.v1.targetPool
+  name: gcp-tp-one
+  properties:
+    region: us-east1
+    instances: [ "projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm11","projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm12","projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm113"]
+    healthChecks: [$(ref.gcp-hc-one.selfLink)]
+- type: compute.v1.forwardingRule
+  name: gcp-fr-one
+  properties:
+    region: us-east1
+    portRange: 80
+    target: $(ref.gcp-tp-one.selfLink) 

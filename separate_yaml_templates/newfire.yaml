@@ -1,0 +1,42 @@
+resources:
+- name: http-port
+  type: compute.v1.firewall
+  properties:
+    #network: default
+    #network: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/global/networks/sam-nlb-test-network
+    network: projects/lithe-bazaar-250717/global/networks/default
+    targetTags: ["http"]
+    sourceRanges: ["0.0.0.0/0"]
+    allowed:
+    - IPProtocol: TCP
+      ports: ["80"]
+- name: custom-firewall
+  type: compute.v1.firewall
+  properties:
+    #network: default
+    #network: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/global/networks/sam-nlb-test-network
+    network: projects/lithe-bazaar-250717/global/networks/default
+    targetTags: ["custom-firewall"]
+    sourceRanges: ["0.0.0.0/0"]
+    allowed:
+    - IPProtocol: TCP
+      ports: ["2100"]
+- name: custom-udp-firewall
+  type: compute.v1.firewall
+  properties:
+    #network: default
+    #network: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/global/networks/sam-nlb-test-network
+    network: projects/lithe-bazaar-250717/global/networks/default
+    targetTags: ["custom-firewall","http"]
+    sourceRanges: ["0.0.0.0/0"]
+    allowed:
+    - IPProtocol: UDP
+      ports: ["3100"]
+
+outputs:
+- name: http-port
+  value: $(ref.http-port.selfLink)
+- name: custom-firewall
+  value: $(ref.custom-firewall.selfLink)
+- name: custom-udp-firewall
+  value: $(ref.custom-udp-firewall.selfLink)

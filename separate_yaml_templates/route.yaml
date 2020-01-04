@@ -1,0 +1,63 @@
+resources:    
+#- name: route1
+#  type: compute.v1.route
+#  properties: 
+#    network: projects/lithe-bazaar-250717/global/networks/default
+#    #destRange: 10.142.0.0/20
+#    destRange: 0.0.0.0/0
+#    description: "route all other traffic through nat"
+#    #nextHopInstance: projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm11
+#    nextHopGateway: projects/lithe-bazaar-250717/global/gateways/default-internet-gateway
+#    tags:
+#    - route1
+#    priority: 800
+#- name: route2
+#  type: compute.v1.route
+#  properties: 
+#    network: projects/lithe-bazaar-250717/global/networks/default
+#    destRange: 10.142.0.0/20
+#    description: "route all other traffic through nat"
+#    nextHopGateway: projects/lithe-bazaar-250717/global/gateways/default-internet-gateway
+#    tags:
+#    - route2
+#    priority: 1000
+- name: route1
+  type: compute.v1.route
+  properties: 
+    network: projects/lithe-bazaar-250717/global/networks/customvpc1
+    destRange: 192.168.1.0/24
+    description: "route all other traffic through nat"
+    nextHopIp: 10.10.1.21
+    #nextHopGateway: projects/lithe-bazaar-250717/global/gateways/default-internet-gateway
+    tags:
+    - route1
+    priority: 1000
+- name: route2
+  type: compute.v1.route
+  properties: 
+    network: projects/lithe-bazaar-250717/global/networks/customvpc1
+    destRange: 192.168.1.0/24
+    description: "route all other traffic through nat"
+    #nextHopIp: 10.10.1.21
+    nextHopGateway: projects/lithe-bazaar-250717/global/gateways/default-internet-gateway
+    tags:
+    - route2
+    priority: 1000
+- name: route3
+  type: compute.v1.route
+  properties: 
+    network: projects/lithe-bazaar-250717/global/networks/customvpc1
+    destRange: 192.168.1.0/24
+    description: "route all other traffic through nat"
+    nextHopInstance: projects/lithe-bazaar-250717/zones/us-east1-b/instances/network-us-vm11
+    #nextHopGateway: projects/lithe-bazaar-250717/global/gateways/default-internet-gateway
+    tags:
+    - route3
+    priority: 1000
+outputs:
+- name: route1
+  value: $(ref.route1.selfLink)
+- name: route2
+  value: $(ref.route2.selfLink)
+- name: route3
+  value: $(ref.route3.selfLink)
