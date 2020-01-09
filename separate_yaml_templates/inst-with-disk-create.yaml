@@ -1,0 +1,52 @@
+resources:
+- type: compute.v1.disk
+  name: disk-1-data
+  properties:
+    sizeGb: 10
+    machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/machineTypes/f1-micro
+    zone: us-east1-c
+    type: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/diskTypes/pd-standard
+    sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-7-wheezy-v20140619
+
+- type: compute.v1.disk
+  name: disk-2-data
+  properties:
+    sizeGb: 10
+    machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/machineTypes/f1-micro
+    zone: us-east1-c
+    type: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/diskTypes/pd-standard
+    sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-7-wheezy-v20140619
+
+- type: compute.v1.disk
+  name: disk-3-data
+  properties:
+    sizeGb: 10
+    machineType: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/machineTypes/f1-micro
+    zone: us-east1-c
+    type: https://www.googleapis.com/compute/v1/projects/lithe-bazaar-250717/zones/us-east1-c/diskTypes/pd-standard
+    sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-7-wheezy-v20140619
+
+- type: compute.v1.instance
+  name: network-us-vm11
+  properties:
+     machineType: projects/lithe-bazaar-250717/zones/us-east1-c/machineTypes/n1-standard-1
+     zone: us-east1-c
+     networkInterfaces:
+       - network: projects/lithe-bazaar-250717/global/networks/default
+         subnetwork: projects/lithe-bazaar-250717/regions/us-east1/subnetworks/default
+         accessConfigs: []
+     disks:
+      - deviceName: disk-1-data
+        boot: true
+        autoDelete: true
+        source: $(ref.disk-1-data.selfLink)
+      - deviceName: disk-2-data
+        boot: false
+        autoDelete: true
+        source: $(ref.disk-2-data.selfLink)
+      - deviceName: disk-3-data
+        boot: false
+        autoDelete: true
+        source: $(ref.disk-3-data.selfLink)
+     tags:
+        items: ["http","route3"]
